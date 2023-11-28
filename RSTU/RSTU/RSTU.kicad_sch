@@ -1,0 +1,82 @@
+(kicad_sch (version 20230121) (generator eeschema)
+
+  (uuid 229eff27-b972-4406-a86e-8362f0a5318d)
+
+  (paper "A4")
+
+  (lib_symbols
+  )
+
+
+  (sheet (at 29.21 34.29) (size 31.75 30.48) (fields_autoplaced)
+    (stroke (width 0.1524) (type solid))
+    (fill (color 0 0 0 0.0000))
+    (uuid 4eb462bb-bd8d-43c3-bd09-e6e4ca7fb67b)
+    (property "Sheetname" "RSTU_085" (at 29.21 33.5784 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheetfile" "RSTU_085.kicad_sch" (at 29.21 65.3546 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+    (instances
+      (project "RSTU"
+        (path "/229eff27-b972-4406-a86e-8362f0a5318d" (page "5"))
+      )
+    )
+  )
+
+  (sheet (at 125.73 35.56) (size 24.13 30.48) (fields_autoplaced)
+    (stroke (width 0.1524) (type solid))
+    (fill (color 0 0 0 0.0000))
+    (uuid 69785bb6-cd60-42b0-925e-efbfe0adb5b9)
+    (property "Sheetname" "RSTU_502" (at 125.73 34.8484 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheetfile" "RSTU_502.kicad_sch" (at 125.73 66.6246 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+    (instances
+      (project "RSTU"
+        (path "/229eff27-b972-4406-a86e-8362f0a5318d" (page "2"))
+      )
+    )
+  )
+
+  (sheet (at 158.75 35.56) (size 38.1 30.48) (fields_autoplaced)
+    (stroke (width 0.1524) (type solid))
+    (fill (color 0 0 0 0.0000))
+    (uuid 959f5d87-fdcf-40ee-85ba-bcc96652ae45)
+    (property "Sheetname" "RSTU_503" (at 158.75 34.8484 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheetfile" "RSTU_503.kicad_sch" (at 158.75 66.6246 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+    (instances
+      (project "RSTU"
+        (path "/229eff27-b972-4406-a86e-8362f0a5318d" (page "4"))
+      )
+    )
+  )
+
+  (sheet (at 76.2 35.56) (size 33.02 29.21) (fields_autoplaced)
+    (stroke (width 0.1524) (type solid))
+    (fill (color 0 0 0 0.0000))
+    (uuid ea7003b5-67cc-4231-b39f-7a547770386c)
+    (property "Sheetname" "RSTU_083" (at 76.2 34.8484 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheetfile" "RSTU_083.kicad_sch" (at 76.2 65.3546 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+    (instances
+      (project "RSTU"
+        (path "/229eff27-b972-4406-a86e-8362f0a5318d" (page "3"))
+      )
+    )
+  )
+
+  (sheet_instances
+    (path "/" (page "1"))
+  )
+)

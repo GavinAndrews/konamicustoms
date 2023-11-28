@@ -1,0 +1,88 @@
+`timescale 1ns/100ps
+module Konami502_tb;
+
+wire s01_io, s02_io, s03_io, s04_io;  // DA
+  
+reg s05_i, s06_i, s07_i, s08_i,  s09_i,  s10_i,  s11_i,  s12_i, s13_i;
+  
+wire s23_io, s24_io, s25_io, s26_io; // DB
+  
+reg s27_i;
+  
+reg clk;
+reg tb_drives;
+
+wire s15_o, s16_o, s17_o, s18_o, 
+  s19_o, s20_o, s21_o, s22_o;
+
+  konami_502 custom(.p01_io(s01_io), .p02_io(s02_io), .p03_io(s03_io), .p04_io(s04_io), .p05_i(s05_i), .p06_i(s06_i), .p07_i(s07_i), 
+                    .p08_i(s08_i),  .p09_i(s09_i),  .p10_i(s10_i),  .p11_i(s11_i),  .p12_i(s12_i), .p13_i(s13_i), /*p14_i,*/ 
+                    .p15_o(s15_o), .p16_o(s16_o), .p17_o(s17_o), .p18_o(s18_o), .p19_o(s19_o), .p20_o(s20_o), .p21_o(s21_o), 
+                    .p22_o(s22_o), .p23_io(s23_io), .p24_io(s24_io), .p25_io(s25_io), .p26_io(s26_io), .p27_i(s27_i) /*, p28_i */);
+
+  
+  reg[15:0] i = 16'bX;
+  
+  reg[3:0] da;
+  reg[3:0] db;
+  
+  assign {s04_io, s03_io, s02_io, s01_io} = tb_drives == 1 ? da : 4'bZ;
+  assign {s23_io, s24_io, s25_io, s26_io} = tb_drives == 1 ? db : 4'bZ;
+
+  assign s05_i = i[1];
+  assign s06_i = tb_drives;
+    
+//  assign s13_i = i[0];
+//  assign s12_i = i[1];
+//  assign s11_i = i[2];
+//  assign s10_i = i[3];
+//  assign s09_i = i[4];
+//  assign s08_i = i[5];
+//  assign s07_i = i[6];
+//  assign s06_i = i[7];
+
+initial begin
+  
+  $dumpfile("dump.vcd");
+  $dumpvars(1);
+
+#0;
+
+clk = 1'b0;
+s27_i = 1'b0; // nRESET Active
+#10;
+  
+s27_i = 1'b1; // nRESET Inactive
+#10;
+
+s09_i = 1'b1; // n256HD
+#10;
+s09_i = 1'b0; // n256HD
+#10;
+
+s08_i = 1'b1; // nLDOUT
+#10;
+s08_i = 1'b0; // nLDOUT
+#10;
+
+s07_i = 1'b1; // 2H
+#10;
+s07_i = 1'b0; // 2H
+#10;
+
+#10;
+tb_drives = 1'b1; 
+
+#10;
+  
+for (i=0; i<128; i=i+1) begin
+  da = { i[4], i[3], i[2], i[0]};
+  db = { ~i[4], ~i[3], ~i[2], ~i[0]};
+   #10;
+end   
+
+  
+$stop;
+end
+
+endmodule
