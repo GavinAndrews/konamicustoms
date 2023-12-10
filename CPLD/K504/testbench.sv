@@ -38,26 +38,32 @@ initial begin
 clk = 1'b0;
 s27_i = 1'b0; // nRESET Active
   
-s06_i =1'b0;
-s10_i =1'b0;
-s11_i =1'b0;
-s05_i =1'b0;
+s05_i =1'b0;  // AFR
+s06_i =1'b0;  // RnW
+  
+s07_i =1'b0;  // P7??
+s08_i =1'b0;  // n256H
+s09_i =1'b0;  // nVBLANK
+s10_i =1'b0;  // 1H
+s11_i =1'b0;  // 2H
+s12_i =1'b0;  // 41H
+s13_i =1'b0;  // 8H
   
 #10;
   
 s27_i = 1'b1; // nRESET Inactive
-s05_i = 1'b1;
+s05_i = 1'b1; // AFR
   
 #10;
 
-  for (i=0; i<256; i=i+1) begin
-    clk = i[0];  // CLK
-    s09_i = i[0]; // nVBLANK
+  for (i=0; i<128; i=i+1) begin
+    clk = ~i[0];  // CLK
+    //s09_i = i[0]; // nVBLANK
     s10_i = i[1];  // 1H
     s11_i = i[2];  // 2H
-    s12_i = i[3];  // 4H
-    s13_i = i[4];  // 8H
-    s08_i = i[5];  // n256H
+    //s12_i = i[3];  // 4H
+    s13_i = i[3];  // 8H
+    //s08_i = i[5];  // n256H
 
    #10;
 end   

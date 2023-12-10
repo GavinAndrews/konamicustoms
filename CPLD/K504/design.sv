@@ -55,52 +55,63 @@ input p27_i;
   
   assign p03_o = dflop2nq;
 
-  wire dflop4q;
-  wire dflop4nq;
-  DFlop dflop4(.d(dflop4nq), .clk(dflop1q), .nReset(p27_i), .q(dflop4q), .nq(dflop4nq));
+  wire dflop3q;
+  wire dflop3nq;
+  DFlop dflop3(.d(dflop3nq), .clk(dflop1q), .nReset(p27_i), .q(dflop3q), .nq(dflop3nq));
 
-  assign p25_o = dflop4nq;
-
-  
-  // DFlop dflop3(.d(dflop2nq), .clk(dflop1nq), .nReset(1), .q(p25_o));
+  assign p25_o = dflop3nq;
   
   wire watchdog_overflow;
   
   Counter counter1(.reset(~p05_i), .clk(~p09_i), .triggered(watchdog_overflow));
 
-  wire dflop5q;
-  DFlop dflop5(.d(watchdog_overflow), .clk(dflop2nq), .nReset(p27_i), .q(dflop5q));
+  wire dflop4q;
+  DFlop dflop4(.d(watchdog_overflow), .clk(dflop2nq), .nReset(p27_i), .q(dflop4q));
   
   // Watchdog Reset
-  assign p04_o=dflop5q;
+  assign p04_o=dflop4q;
   
   // GUESS
   assign p15_o = ~(p10_i & ~p11_i & ~p12_i);
   
   assign p16_o = ~p10_i & ~p11_i;
   assign p20_o = ~(p10_i & p11_i);
+  assign p21_o = ~(p10_i & p11_i & p12_i);
   
-  
-  // p17 Logic
   
   alias _n256H = p08_i;
   alias _nVBLANK = p09_i;
   alias _4H = p12_i;
   alias _8H = p13_i;
   
+  wire dflop5q;
+  wire dflop5nq;
+  DFlop dflop5(.d(~_n256H), .clk(_8H), .nReset(p27_i), .q(dflop5q), .nq(dflop5nq));
+  
   wire dflop6q;
   wire dflop6nq;
-  DFlop dflop6(.d(~_n256H), .clk(_8H), .nReset(p27_i), .q(dflop6q), .nq(dflop6nq));
+  DFlop dflop6(.d(dflop5q), .clk(_4H), .nReset(p27_i), .q(dflop6q), .nq(dflop6nq));
+  
+  assign p17_o = ~(dflop6nq & _nVBLANK);
+  
+  assign p18_o = ~(~p10_i & p11_i & p13_i);
+  assign p19_o = p10_i & p11_i & ~p13_i;
+  
   
   wire dflop7q;
   wire dflop7nq;
-  DFlop dflop7(.d(dflop6q), .clk(_4H), .nReset(p27_i), .q(dflop7q), .nq(dflop7nq));
+  DFlop dflop7(.d(p10_i), .clk(jkflop1q), .nReset(p27_i), .q(dflop7q), .nq(dflop7nq));
   
-  assign p17_o = ~(dflop7nq & _nVBLANK);
+  wire p22 = p03_o | dflop7q | p06_i;
+  assign p22_o = p22;  
   
-  // Not Yet Implemented
-  assign p18_o = 1'bZ;
-  assign p19_o = 1'bZ;
+ assign p23_o = p07_i | p10_i | p22; 
+
+ assign p24_o = p07_i | dflop7q | ~p06_i;
+  
+  
+  
+  
   
 endmodule
 
